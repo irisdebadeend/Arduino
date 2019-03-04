@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 OOCSI oocsi;
-Serial myPort;  
-PFont  myFont;  
+Serial myPort;
 String distance = "";
 String data = "";
 Date timestamp = new Date();
@@ -31,8 +30,6 @@ void draw() {
   //fill(255); do not remove comment
   text(distance,820,400);
   textSize(100);
-  fill(#4B5DCE);
-  text("              Distance :        cm",450,400);
   noFill();
   stroke(#4B5DCE);
   textAlign(CENTER);
@@ -44,16 +41,14 @@ void draw() {
 }
 
 void handleOOCSIEvent(OOCSIEvent e) {
-  if(random(100)<0.1){//change condition to something like "(int(distance) < 20)" (if someone is closer than 20cm to the sensor)
+  if(random(100)<0.5){ //could not retrieve the integers, so now only random
     timestamp = e.getTimestamp();
   }
-  data = e.getString("distance", "");
+  data = e.getString("distanceSensor1", ""); //<>//
   oocsi.channel("TimestoneSquad").data("distanceSensor1",distance).send();
 }
 
 
 void serialEvent(Serial myPort) {
   distance = myPort.readStringUntil('\n');
-  String[] distances = split(distance,'X');
-  println(distances[1]);
 }

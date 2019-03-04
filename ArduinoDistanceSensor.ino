@@ -23,9 +23,13 @@ void loop() {
   SonarSensor(trigPin2, echoPin2);
   RightSensor = distance;
 
+  Serial.print("Sensor 1: ");
   Serial.print(LeftSensor);
-  Serial.print("X");
-  Serial.println(RightSensor);
+  Serial.print("CM");
+  Serial.print(" - ");
+  Serial.print(" Sensor 2: ");
+  Serial.print(RightSensor);
+  Serial.println("CM");
 }
 
 void SonarSensor(int trigPin, int echoPin) {
